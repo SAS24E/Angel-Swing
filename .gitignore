@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Model files
+*.keras
+*.h5
+
+# Datasets
+dataset/
+clean_dataset/
+
+# Logs
+*.log
+
+# VS Code settings
+.vscode/
+
+# OS clutter
+.DS_Store
+Thumbs.db
