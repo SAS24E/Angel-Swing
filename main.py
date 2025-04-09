@@ -19,8 +19,9 @@ def main():
 
         detected_ball, candidates, thresh = detect_golf_ball(frame)
 
-        # Show all candidate circles (blue)
-        for (cx, cy, r) in candidates:
+        # Show top 3 candidate circles (blue)
+        top_candidates = sorted(candidates, key=lambda x: x[2], reverse=True)[:3]
+        for (cx, cy, r) in top_candidates:
             cv2.circle(frame, (cx, cy), r, (255, 0, 0), 1)
 
         # Show best match with confidence overlay
@@ -43,10 +44,13 @@ def main():
             cv2.putText(frame, "No confident detection", (20, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
-        cv2.imshow("Golf Ball Detection", frame)
-        cv2.imshow("Threshold Debug", thresh)
+        # Resize debug view to avoid lag
+        debug_thresh = cv2.resize(thresh, (320, 240))
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        cv2.imshow("Golf Ball Detection", frame)
+        cv2.imshow("Threshold Debug", debug_thresh)
+
+        if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
     cap.release()
