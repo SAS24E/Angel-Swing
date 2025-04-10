@@ -1,0 +1,4 @@
+opencv-python>=4.5.0 # For webcam capture, image preprocessing, and display (cv2)
+numpy>=1.21.0 # Used throughout for image processing, tensors, math
+tensorflow==2.15.0 # Deep learning framework (model loading, prediction, training)
+scikit-learn>=1.0.0 # For train/test split and possibly future evaluation tools

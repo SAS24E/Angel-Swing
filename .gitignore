@@ -1,0 +1,40 @@
+# === Python Cache ===
+__pycache__/
+*.pyc
+
+# === Virtual Environment (local only) ===
+.venv/
+venv/
+
+# === Machine Learning Model Files ===
+*.keras
+*.h5
+models/
+
+# === Datasets ===
+dataset/
+clean_dataset/
+
+# === Logs ===
+*.log
+
+# === Editor Settings ===
+.vscode/
+
+# === Jupyter Notebook Checkpoints ===
+.ipynb_checkpoints/
+
+# === Backup and Temporary Files ===
+*.bak
+*.swp
+*.tmp
+
+# === Environment Variables (Secrets, Keys) ===
+.env
+.env.*
+
+# === OS Clutter ===
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
