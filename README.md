@@ -117,7 +117,7 @@ Use `pip freeze > requirements.txt` to update as needed.
 
 ## 🪪 License
 
-[MIT License](https://choosealicense.com/licenses/mit/) (You can update this based on your preference)
+[MIT License](https://choosealicense.com/licenses/mit/) 
 
 ---
 
