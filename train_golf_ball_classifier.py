@@ -1,3 +1,9 @@
+# File Name: train_golf_ball_classifier.py
+# Description: Loads labeled golf ball images, builds a CNN model using TensorFlow/Keras,
+#              trains the model, evaluates its accuracy, and saves it to disk.
+# Date: 04/09/25
+# References: TensorFlow, Keras, OpenCV, NumPy, scikit-learn
+
 import os
 import cv2
 import numpy as np
@@ -11,7 +17,12 @@ IMG_SIZE = 128  # Match the resolution of your labeled images
 DATASET_DIR = "clean_dataset"  # Use the new cleaned dataset
 CATEGORIES = ["negative", "positive"]
 
-# === Load your labeled images ===
+# Function Name: load_data
+# Description: Loads grayscale images from labeled folders, resizes and normalizes them,
+#              and returns the data and label arrays for training.
+# Parameter Description: None (uses global constants IMG_SIZE and DATASET_DIR)
+# Date: 04/09/25
+# References: OpenCV, NumPy
 def load_data():
     data, labels = [], []
 
@@ -30,7 +41,11 @@ def load_data():
     labels = np.array(labels)
     return data, labels
 
-# === Define CNN ===
+# Function Name: build_model
+# Description: Constructs and compiles a Convolutional Neural Network for binary classification.
+# Parameter Description: None (uses IMG_SIZE as input shape)
+# Date: 04/09/25
+# References: TensorFlow, Keras
 def build_model():
     model = Sequential([
         Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 1)),
@@ -45,7 +60,12 @@ def build_model():
     model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
     return model
 
-# === Train and Save ===
+# Function Name: main
+# Description: Handles the full pipeline: loading data, training the CNN model,
+#              saving it to file, and printing evaluation accuracy.
+# Parameter Description: None
+# Date: 04/09/25
+# References: TensorFlow, scikit-learn
 def main():
     print("📥 Loading data...")
     data, labels = load_data()

@@ -1,3 +1,10 @@
+# File Name: label_golf_ball_data.py
+# Description: Launches a live webcam feed and allows manual labeling of detected golf ball candidates.
+#              Saves crops as either positive or negative samples to build a clean training dataset.
+#              Keys: [Y] = golf ball, [N] = not a golf ball, [Q] = quit.
+# Date: 04/09/25
+# References: OpenCV, NumPy, golf_ball_detector
+
 import cv2
 import os
 import numpy as np
@@ -11,6 +18,12 @@ os.makedirs(NEG_DIR, exist_ok=True)
 
 IMG_SIZE = 128
 
+# Function Name: preprocess_crop
+# Description: Converts a cropped BGR image to grayscale, pads to square, resizes to 128x128,
+#              sharpens the result, and returns the processed image.
+# Parameter Description: crop (NumPy array) – Input image crop.
+# Date: 04/09/25
+# References: OpenCV, NumPy
 def preprocess_crop(crop):
     """Resize, pad to square, sharpen, and return cleaned crop."""
     gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -32,12 +45,26 @@ def preprocess_crop(crop):
 
     return sharpened
 
+# Function Name: save_crop
+# Description: Saves the processed crop to the appropriate dataset folder based on label.
+# Parameter Description:
+#   image (NumPy array) – The processed image to save.
+#   label (str) – 'y' for positive or 'n' for negative.
+#   index (int) – Index for file naming.
+# Date: 04/09/25
+# References: None
 def save_crop(image, label, index):
     path = POS_DIR if label == 'y' else NEG_DIR
     filename = os.path.join(path, f"{label}_{index:04}.png")
     cv2.imwrite(filename, image)
     print(f"✅ Saved to {filename}")
 
+# Function Name: main
+# Description: Initializes webcam feed and detection loop. Prompts the user to label each
+#              candidate crop as a golf ball or not, and saves images accordingly.
+# Parameter Description: None
+# Date: 04/09/25
+# References: OpenCV
 def main():
     cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     if not cap.isOpened():

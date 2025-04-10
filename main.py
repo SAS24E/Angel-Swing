@@ -1,7 +1,18 @@
+# File Name: main.py
+# Description: This script initializes the webcam feed and runs real-time golf ball detection,
+#              drawing confidence overlays and candidate markers on the video stream.
+# Date: 04/09/25
+# References: OpenCV, NumPy, golf_ball_tracker.py
 import cv2
 import numpy as np
 from golf_ball_tracker import detect_golf_ball
 
+# Function Name: main
+# Description: Launches webcam feed and runs real-time golf ball detection with
+#              visual overlays for top candidates and confidence-based coloring.
+# Parameter Description: None
+# Date: 04/09/25
+# References: OpenCV, golf_ball_tracker.detect_golf_ball
 def main():
     cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     if not cap.isOpened():

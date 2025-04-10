@@ -1,12 +1,28 @@
+# File Name: golf_ball_detector.py
+# Description: Uses a trained CNN model to detect golf balls from video frames by applying HSV filtering,
+#              extracting candidate regions via contour detection, and classifying them based on confidence.
+#              The most confident detection is returned alongside a list of candidates and the threshold mask.
+# Date: 04/09/25
+# References: TensorFlow, Keras, OpenCV, NumPy
+
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 
 # === Load the trained model ===
+# Model Name: golf_ball_model.keras
+# Description: Trained model for classifying golf balls based on cropped image patches.
+# Date: 04/09/25
+# References: TensorFlow, Keras, OpenCV
 MODEL = load_model("golf_ball_model.keras")
 IMG_SIZE = 128  # Must match your training image size
 CONFIDENCE_THRESHOLD = 0.5
 
+# Function Name: preprocess_crop
+# Description: Resize, convert to grayscale, normalize, and reshape image for prediction.
+# Parameter Description: crop (NumPy array) – Image patch to preprocess.
+# Date: 04/09/25
+# References: None
 def preprocess_crop(crop):
     """Resize, convert to grayscale, normalize, and reshape for the model."""
     resized = cv2.resize(crop, (IMG_SIZE, IMG_SIZE))
@@ -16,6 +32,14 @@ def preprocess_crop(crop):
     tensor = np.expand_dims(tensor, axis=-1)
     return tensor
 
+# Function Name: filter_contours
+# Description: Filters contours based on area, preprocesses image crops, runs model prediction,
+#              and tracks the best scoring candidate with confidence above threshold.
+# Parameter Description: 
+#   contours (list) – Contours from cv2.findContours.
+#   frame (NumPy array) – Original video frame for cropping.
+# Date: 04/09/25
+# References: None
 def filter_contours(contours, frame):
     candidates = []
     best_confidence = 0
@@ -45,6 +69,12 @@ def filter_contours(contours, frame):
 
     return best_candidate, candidates
 
+# Function Name: detect_golf_ball
+# Description: Applies color filtering in HSV space to isolate white regions,
+#              finds contours, and identifies the best circle candidate classified as a golf ball.
+# Parameter Description: frame (NumPy array) – BGR image frame from webcam or video.
+# Date: 04/09/25
+# References: None
 def detect_golf_ball(frame):
     """Detect circular shapes, classify them, and return the best match."""
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
