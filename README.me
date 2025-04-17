@@ -1,0 +1,78 @@
+
+# Golf Ball Detector
+
+A Python-based golf ball detection system that uses machine learning and OpenCV. This project leverages a custom-trained image classifier to identify golf balls in webcam footage. It's designed as a foundational tool for golf swing analyzers, simulators, and training aids.
+
+## 🚀 Features
+
+- 📷 **Real-Time Golf Ball Detection** via webcam  
+- 🤖 **Machine Learning Integration** for improved detection accuracy  
+- 🧠 **Custom Trained Model** using texture- and contour-based features (e.g., dimples)  
+- 🛠️ Adjustable pre-processing and post-processing filters (HSV, blur, thresholds, etc.)
+
+## 🧠 Model Info
+
+- Format: TensorFlow/Keras model (`.h5`)  
+- Trained on: Custom image dataset (positive: golf balls, negative: background)  
+- Accuracy: ~81% on validation set  
+- Goal: Enhance precision and reduce false positives in dynamic outdoor environments
+
+## 🛠️ Requirements
+
+- Python 3.7+
+- OpenCV (`cv2`)
+- NumPy
+- TensorFlow or Keras
+
+Install dependencies:
+
+```bash
+pip install opencv-python numpy tensorflow
+```
+
+## 📂 File Structure
+
+```
+Golf_Ball_Detector/
+├── ball_detector.py       # Main script with real-time detection
+├── model.h5               # Trained ML model
+├── train_model.py         # Script for training the classifier
+├── dataset/               # Folder containing labeled training data
+├── utils.py               # Helper functions (drawing, filters, model loading)
+├── README.md              # Project documentation
+└── media/                 # Sample screenshots or test video clips
+```
+
+## ▶️ Usage
+
+Run the main detector:
+
+```bash
+python ball_detector.py
+```
+
+Or retrain the model (if you’ve updated the dataset):
+
+```bash
+python train_model.py
+```
+
+## 🔬 Training Data
+
+To retrain, place your labeled images in:
+
+```
+dataset/
+├── ball/         # Positive samples (images with golf balls)
+└── background/   # Negative samples (no golf balls)
+```
+
+## 🔮 Future Plans
+
+- Integrate YOLO or MobileNet for advanced object detection  
+- Connect with a full swing analyzer pipeline  
+- Add live confidence display and bounding box overlays  
+
+## 📸 Example (Coming Soon)
+
+> Video clips and screenshots demonstrating real-time golf ball detection.
